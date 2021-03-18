@@ -7,7 +7,7 @@ export const Navbar = ({ title }) => {
            <Text style={styles.text}>{title}</Text>
        </View>
     )
-}
+};
 
 const styles = StyleSheet.create({
     navbar: {
@@ -21,4 +21,4 @@ const styles = StyleSheet.create({
         color: 'white', 
         fontSize: 20
     }
-})
+});
