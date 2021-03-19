@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, FlatList } from 'react-native';
 import { Navbar } from './src/Navbar';
 import { AddTodo } from './src/AddTodo';
+import { Todo } from './src/Todo';
 
 export default function App() {
   const [todos, setTodos] = useState([]);
@@ -26,16 +27,20 @@ export default function App() {
 
   }
   return (
-    <View>
+    <View> 
       <Navbar title={'Todo App'}/>
       <View style={styles.container}>
          <AddTodo onSubmit={addTodo} />
-         <View>
-          { todos.map(todo => {
-              return <Text>{todo.title}</Text>
-           })
+
+         <FlatList 
+          data={todos}
+          keyExtractor={item=>item.id.toString()}
+          renderItem={({item}) => <Todo todo={item} />}
+          />
+         {/* <View>
+          { todos.map(todo => (<Todo todo={todo} key={todo.id} />))
           }
-         </View>
+         </View> */}
       </View> 
     </View>
   );
@@ -44,7 +49,8 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 30,
-    paddingVertical: 20
+    paddingVertical: 20, 
+    height: 550
   },
 });
 
