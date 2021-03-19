@@ -19,13 +19,16 @@ export default function App() {
   //       newTodo
   //     ]
   //   });
-
     setTodos(prev => [...prev, {
       id: Date.now().toString(),
       title
     }]);
-
   }
+
+  const removeTodo = id => {
+    setTodos(prev => prev.filter(todo => todo.id !== id))
+  }
+
   return (
     <View> 
       <Navbar title={'Todo App'}/>
@@ -35,7 +38,7 @@ export default function App() {
          <FlatList 
           data={todos}
           keyExtractor={item=>item.id.toString()}
-          renderItem={({item}) => <Todo todo={item} />}
+          renderItem={({item}) => <Todo todo={item} onRemove={removeTodo} />}
           />
          {/* <View>
           { todos.map(todo => (<Todo todo={todo} key={todo.id} />))
